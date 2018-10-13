@@ -13,7 +13,7 @@ double partialSum (const double x, const int n) {
 	double prod = 1;
 	for(int i = 1; i < n + 1; ++i) {
 		prod *= x;
-		int sign = (i % 2 == 0) ? 1 : -1;
+		int sign = (i % 2 == 1) ? 1 : -1;
 		sum = sum + sign * prod / i;
 	}
 
@@ -31,13 +31,12 @@ double extrapolatedSum (const double x, const int n) {
 	s1 = new double[n];
 	s2 = new double[n-2];
 
-	for (int i = 0; i < n + 1; ++i) {
+	for (int i = 1; i < n + 1; ++i) {
 		prod *= x;
-		int sign = (i%2 == 0) ? 1 : -1;
+		int sign = (i%2 == 1) ? 1 : -1;
 		sum += sign * prod / i;
-		s1[i] = sum;
+		s1[i-1] = sum;
 	}
-
 	sum = aitkenExtrapolate(s1, s2, n);
 
 	delete [] s1;
@@ -47,7 +46,7 @@ double extrapolatedSum (const double x, const int n) {
 
 int main (int argc, char ** argv) {
 
-	const int N = 10, n = 13;
+	const int N = 10, n = 5;
 
 	int i;
 
@@ -55,13 +54,13 @@ int main (int argc, char ** argv) {
 
 	xlist[N] = 1.25;
 	for (int i = 0; i < N; ++i) {
-		xlist[i] = 1.0 * i / (N - 1);
+		xlist[i] = 1.0 * (i + 1) / (N - 1);
 	}
 
-	std::cout<<"\tx \tPartial sum \tExtrapolated Sum \tTrue Value"<<std::endl;
+	std::cout<<"\tx \t\tPartial sum \t\tExtrapolated Sum \t\tTrue Value"<<std::endl;
 	
 	std::cout<<std::fixed;
-	std::cout<<std::setprecision(3);
+	std::cout<<std::setprecision(7);
 
 	for (int i = 0; i < N + 1; ++i) {
 		val1 = partialSum(xlist[i], n);

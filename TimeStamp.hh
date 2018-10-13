@@ -7,7 +7,7 @@ class TimeStamp {
 		unsigned int a2, d2;
 	
 	public:
-		TimeStamp();
+		TimeStamp(){};
 
 		void tic() { // does not serialize process
 			asm volatile ("rdtsc" : "=a" (a1), "=d" (d1)); 

@@ -1,5 +1,6 @@
 #include "aitken.hpp"
 #include <algorithm>
+#include <iostream>
 
 double transform (double s, double s_next, double s_next2) {
 
@@ -24,5 +25,5 @@ double aitkenExtrapolate(double* sn, double* scratch, int n){
 		n = n - 2;
 	}
 
-	return scratch[0];
+	return (n%2 == 1) ? scratch[0] : scratch[1];
 }
